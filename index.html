@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Samuel N. — Web Developer Portfolio</title>
+  <meta name="description" content="Samuel Nkanor — Web developer in training. Frontend portfolio: projects, skills, contact." />
+  <meta name="author" content="Samuel Nkanor" />
+
+  <style>
+    /* =====================
+       Styles (full file)
+       ===================== */
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #1fb6ff;
+      --accent-2:#7c3aed;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius: 14px;
+      --container: 1100px;
+      --ff-sans: 'Helvetica Neue', Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;padding:0;
+      font-family:var(--ff-sans);
+      background:linear-gradient(180deg,var(--bg) 0%, #071025 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      scroll-behavior:smooth;
+    }
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Layout */
+    .wrap{max-width:var(--container);margin:0 auto;padding:28px}
+    header{position:sticky;top:12px;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));backdrop-filter: blur(6px);border-radius:18px;padding:12px;margin-bottom:18px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:46px;width:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#041024;font-size:18px}
+    .brand h1{margin:0;font-size:16px}
+    .brand p{margin:0;color:var(--muted);font-size:12px}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:10px;align-items:center}
+    nav a{padding:8px 12px;border-radius:10px;font-size:14px;color:var(--muted)}
+    nav a:hover{background:var(--glass);color:var(--accent)}
+
+    .cta{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021025;font-weight:600}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px}
+
+    .mobile-toggle{display:none}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));border-radius:18px}
+    .hero-left h2{margin:0 0 12px 0;font-size:30px}
+    .role{color:var(--muted);margin-bottom:12px}
+    .hero p{margin:0 0 18px 0;color:var(--muted);max-width:62ch}
+
+    /* Cards */
+    .card{background:linear-gradient(180deg,var(--card), rgba(8,12,20,0.7));padding:18px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+    /* Profile avatar containers */
+    .profile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+    .avatar{width:160px;height:160px;border-radius:16px;background:linear-gradient(180deg,#ffffff08,#ffffff03);overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .avatar img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+
+    .contact-mini{display:flex;flex-direction:column;gap:8px;width:100%}
+    .contact-mini a{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:var(--glass-2);color:var(--muted)}
+
+    /* Sections & utilities */
+    section{margin-top:22px}
+    .section-title{display:flex;align-items:end;gap:12px}
+    .section-title h3{margin:0}
+    .section-title p{margin:0;color:var(--muted);font-size:13px}
+    .row{display:flex;gap:12px;align-items:center}
+    .spacer{flex:1}
+
+    /* About grid */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{background:var(--glass);padding:12px;border-radius:10px;min-width:120px}
+
+    /* Skills */
+    .skills{display:flex;flex-direction:column;gap:10px}
+    .skill{display:flex;flex-direction:column;gap:6px}
+    .skill .bar{height:10px;background:var(--glass);border-radius:999px;overflow:hidden}
+    .skill .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:50%}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .project h4{margin:0 0 8px 0}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+    .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+    .preview{margin-top:12px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+    .preview img{width:100%;height:160px;object-fit:cover}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{min-height:140px;resize:vertical}
+
+    /* Footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .projects-grid{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+      nav ul{display:none}
+      .mobile-toggle{display:block}
+    }
+    @media (max-width:560px){
+      .projects-grid{grid-template-columns:1fr}
+      .hero-left h2{font-size:24px}
+      .logo{height:40px;width:40px}
+      .avatar{width:120px;height:120px}
+    }
+
+    /* Animations & utilities */
+    .fade-up{opacity:0;transform:translateY(8px);transition:opacity .5s ease, transform .5s ease}
+    .fade-up.in{opacity:1;transform:none}
+    .top-btn{position:fixed;right:18px;bottom:18px;padding:12px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#021025;z-index:80;display:none}
+    .top-btn.show{display:block}
+  </style>
+</head>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("p-8zAEAJzGpsSyDAM"); // replace with your Public Key from EmailJS
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_882ky2t", "template_9qy3j3b ", this)
+      .then(function() {
+        alert("Message sent successfully!");
+      }, function(error) {
+        alert("Failed to send message. Error: " + JSON.stringify(error));
+      });
+  });
+</script>
+<body>
+  <div class="wrap">
+    <!-- Header -->
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">SN</div>
+          <div>
+            <h1>Samuel Nkanor</h1>
+            <p>Frontend Web Developer — remote-friendly</p>
+          </div>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#contact">Hire me</a>
+          <button class="mobile-toggle btn-ghost" id="mobileToggle" aria-label="Open navigation">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-left card fade-up" id="heroLeft">
+          <h2>Hi, I'm <strong>Samuel</strong> — a web developer in training</h2>
+          <div class="role">Building simple, smart and accessible frontends for web and remote teams</div>
+          <p>I specialize in clean HTML, modern CSS and vanilla JavaScript. I enjoy turning designs into responsive, accessible experiences — with performance and clarity in mind.</p>
+          <div class="quick-links">
+            <a class="btn" href="#projects">See projects</a>
+            <a class="btn-ghost" href="#contact">Contact</a>
+           <a class="btn-ghost" href="SAMUEL%20ITA%20NKANOR%20cv.pdf" download>Download Resume (PDF)</a>
+<a class="btn-ghost" href="SAMUEL%20ITA%20NKANOR%20cv.pdf" target="_blank">View Resume Online</a>
+
+          </div>
+
+          <div style="margin-top:16px;color:var(--muted);font-size:14px">
+            <strong>Currently:</strong> internship & freelance projects • open to remote work
+          </div>
+        </div>
+
+        <aside class="card profile fade-up" id="heroRight">
+          <!-- Primary avatar container (hero) -->
+          <div class="avatar" id="heroAvatar">
+            <!-- Replace 'your-photo.jpg' with your image file path -->
+            <img src="member 3. jpg.jpg" alt="Samuel Nkanor portrait" id="heroAvatarImg" />
+          </div>
+
+          <div>
+            <h3 style="margin:0;">Samuel Nkanor</h3>
+            <p style="margin:6px 0 0 0;color:var(--muted);font-size:13px">Web developer & software engineer in training</p>
+          </div>
+
+          <div class="contact-mini">
+            <a href="tel:+2349076759510">Phone <span>+234 907 675 9510</span></a>
+            <a href="mailto:mac.nkanor@gmail.com">Email <span>mac.nkanor@gmail.com</span></a>
+            <a href="#contact">Message <span>Let's talk →</span></a>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <a class="btn-ghost" href="#projects">Portfolio</a>
+            <a class="btn-ghost" href="#contact">Let's chat</a>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-title">
+          <h3>About</h3>
+          <p>Background & quick facts</p>
+        </div>
+
+        <div class="about-grid" style="margin-top:12px">
+          <!-- About: left (bio + small avatar) -->
+          <div class="card bio fade-up">
+            <div class="avatar" style="width:110px;height:110px;margin:0 auto 12px auto;">
+              <img src="member 3. jpg.jpg" alt="Samuel portrait" />
+            </div>
+            <p>
+              I'm a web developer in training with hands-on experience building websites and web apps. I focus on frontend development — HTML, CSS and JavaScript — and enjoy creating clear, maintainable interfaces that prioritize accessibility and performance.
+            </p>
+            <p style="margin-top:10px;color:var(--muted)">
+              Education: B.Sc. Software Engineering (in view). Self-study on Udemy & Coursera (2024). Currently doing internships and freelance projects building responsive websites.
+            </p>
+
+            <div style="margin-top:12px" class="stats">
+              <div class="stat">
+                <h4>6+</h4>
+                <p style="margin:6px 0 0 0;color:var(--muted);font-size:13px">Live websites built</p>
+              </div>
+              <div class="stat">
+                <h4>Remote-ready</h4>
+                <p style="margin:6px 0 0 0;color:var(--muted);font-size:13px">Comfortable with async communication</p>
+              </div>
+              <div class="stat">
+                <h4>Communication</h4>
+                <p style="margin:6px 0 0 0;color:var(--muted);font-size:13px">Strong collaborator & quick learner</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- About: right (experience, tools) -->
+          <div class="card fade-up">
+            <h4 style="margin-top:0">Experience & Tools</h4>
+            <div style="margin-top:8px;color:var(--muted)">
+              <p style="margin:0">Internship: Frontend Developer — Ubitech (2025)</p>
+              <p style="margin:6px 0 0 0">Worked on multiple sites (React prototypes, vanilla JS landing pages, responsive layouts).</p>
+            </div>
+
+            <div style="margin-top:12px">
+              <strong>Tools I use</strong>
+              <ul style="margin:8px 0 0 0;padding-left:18px;color:var(--muted)">
+                <li>VS Code • Git • GitHub</li>
+                <li>Chrome DevTools • Lighthouse</li>
+                <li>HTML5 • CSS3 • JavaScript (ES6+)</li>
+                <li>Figma (basic)</li>
+              </ul>
+            </div>
+
+            <div style="margin-top:12px">
+              <strong>References</strong>
+              <p style="margin:8px 0 0 0;color:var(--muted)">Daniel Charles • Gold Edem</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-title">
+          <h3>Projects</h3>
+          <p>Recent work & experiments</p>
+        </div>
+
+        <div class="projects-grid" style="margin-top:12px">
+          <!-- Project cards (6) -->
+          <article class="project card fade-up">
+            <div class="preview"><img src="portfolioweb.jpeg" alt="Project 1 screenshot" /></div>
+            <h4>Portfolio Website</h4>
+            <p>A responsive personal portfolio built with semantic HTML, modern CSS and vanilla JS.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#" aria-label="Open project">Open</a>
+              <a class="btn-ghost" href="#" aria-label="Source code">Code</a>
+            </div>
+          </article>
+
+          <article class="project card fade-up">
+            <div class="preview"><img src="landing page.jpeg" alt="Project 2" /></div>
+            <h4>Company Landing Page</h4>
+            <p>Landing page for an oil & gas contractor. Accessible structure and performance optimizations.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Performance</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#">Open</a>
+              <a class="btn-ghost" href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project card fade-up">
+            <div class="preview"><img src="Task Manager.jpeg" alt="Project 3" /></div>
+            <h4>Task Manager</h4>
+            <p>Small app using localStorage — create, edit, delete tasks with keyboard accessibility.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">localStorage</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#">Open</a>
+              <a class="btn-ghost" href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project card fade-up">
+            <div class="preview"><img src="e commence.jpeg" alt="Project 4" />
+            <h4>E‑commerce UI</h4>
+            <p>Front-end prototype: product grid, filter UI and cart interactions; keyboard-friendly components.</p>
+            <div class="tags"><span class="tag">UI</span><span class="tag">HTML</span><span class="tag">JS</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#">Open</a>
+              <a class="btn-ghost" href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project card fade-up">
+            <div class="preview"><img src="Accordion UI Design - Dhanaprakash K.jpeg" alt="Project 5" /></div>
+            <h4>FAQ Accordion Widget</h4>
+            <p>Lightweight accessible accordion used in documentation pages — ARIA roles and keyboard support.</p>
+            <div class="tags"><span class="tag">Vanilla JS</span><span class="tag">Accessibility</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#">Open</a>
+              <a class="btn-ghost" href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project card fade-up">
+            <div class="preview"><img src="Data Table.jpeg" alt="Project 6" /></div>
+            <h4>Interactive Data Table</h4>
+            <p>Sortable, filterable table with pagination and keyboard navigation (frontend implementation).</p>
+            <div class="tags"><span class="tag">JS</span><span class="tag">UI</span></div>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <a class="btn-ghost" href="#">Open</a>
+              <a class="btn-ghost" href="#">Code</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-title">
+          <h3>Skills</h3>
+          <p>Technical skills and familiar tools</p>
+        </div>
+
+        <div class="card fade-up" style="margin-top:12px">
+          <div class="skills">
+            <div class="skill">
+              <div class="row"><strong>HTML &amp; Semantics</strong><div class="spacer"></div><span>95%</span></div>
+              <div class="bar"><i style="width:95%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="row"><strong>CSS (Flex, Grid, Responsive)</strong><div class="spacer"></div><span>88%</span></div>
+              <div class="bar"><i style="width:88%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="row"><strong>JavaScript (ES6+)</strong><div class="spacer"></div><span>82%</span></div>
+              <div class="bar"><i style="width:82%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="row"><strong>Version Control (Git)</strong><div class="spacer"></div><span>75%</span></div>
+              <div class="bar"><i style="width:75%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="row"><strong>Accessibility &amp; Performance</strong><div class="spacer"></div><span>78%</span></div>
+              <div class="bar"><i style="width:78%"></i></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;color:var(--muted)">
+            <strong>Tools:</strong> VS Code • Git • GitHub • Chrome DevTools • Lighthouse • Figma (basic)
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-title">
+          <h3>Contact</h3>
+          <p>Send a message or download my resume</p>
+        </div>
+
+        <div class="contact-grid" style="margin-top:12px">
+          <div class="card fade-up">
+            <h4 style="margin-top:0">Get in touch</h4>
+            <p style="color:var(--muted)">Prefer email? Use the form and I'll reply within a few days (usually faster for quick messages).</p>
+
+ <!-- ✅ Contact Form -->
+<form id="contact-form">
+  <input type="text" name="from_name" placeholder="Your Name" required />
+  <input type="email" name="email" placeholder="Your Email" required />
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn">Send</button>
+</form>
+
+<!-- ✅ EmailJS Script -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    // Initialize EmailJS with your public key
+    emailjs.init("p-8zAEAJzGpsSyDAM");
+  })();
+
+  // Wait until DOM is fully loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_882ky2t", "template_9qy3j3b", this)
+        .then(function() {
+          alert("✅ Message sent successfully!");
+          form.reset(); // clear the form
+        }, function(error) {
+          alert("❌ Failed to send message. Error: " + JSON.stringify(error));
+        });
+    });
+  });
+</script>
+
+
+
+            <div style="margin-top:12px;color:var(--muted)">
+              <p><strong>Email:</strong> mac.nkanor@gmail.com</p>
+              <p><strong>Phone:</strong> +234 907 675 9510</p>
+              <p><strong>Location:</strong> Nigeria</p>
+            </div>
+          </div>
+
+          <aside class="card fade-up">
+            <h4 style="margin-top:0">Contact & Socials</h4>
+            <p style="color:var(--muted)">Connect on GitHub, LinkedIn or send a direct email.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+              <a class="btn-ghost" href="#">GitHub</a>
+              <a class="btn-ghost" href="#">LinkedIn</a>
+              <a class="btn-ghost" href="#">Twitter</a>
+            </div>
+
+            <div style="margin-top:18px">
+              <strong>Availability</strong>
+              <p style="margin:6px 0 0 0;color:var(--muted)">Open to remote work and short-term contracts. Comfortable working under a lead engineer and within teams.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div style="max-width:800px;margin:0 auto">
+          <p>© <span id="year"></span> Samuel Nkanor — Built with HTML, CSS &amp; JS • Designed for clarity.</p>
+        </div>
+      </footer>
+
+    </main>
+
+    <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+
+  </div>
+
+  <script>
+    // =====================
+    // JavaScript (full)
+    // =====================
+    (function(){
+      // Mobile nav toggle
+      const mobileToggle = document.getElementById('mobileToggle');
+      const navList = document.querySelector('nav ul');
+      mobileToggle && mobileToggle.addEventListener('click', ()=>{
+        if(getComputedStyle(navList).display === 'none'){
+          navList.style.display = 'flex';
+          navList.style.flexDirection = 'column';
+          navList.style.position = 'absolute';
+          navList.style.right = '18px';
+          navList.style.top = '64px';
+          navList.style.background = 'var(--card)';
+          navList.style.padding = '12px';
+        } else {
+          navList.style.display = 'none';
+        }
+      });
+
+      // Close nav when link clicked (mobile)
+      document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click', ()=>{
+        if(window.innerWidth <= 980) navList.style.display = 'none';
+      }));
+
+      // Set year
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Resume download (placeholder)
+      const downloadResume = document.getElementById('downloadResume');
+      downloadResume && downloadResume.addEventListener('click', (e)=>{
+        e.preventDefault();
+        // If you have a hosted resume replace the URL below with that file link
+        const blob = new Blob([
+          'Samuel Nkanor\nResume placeholder. Replace this blob with your real PDF file when available.'
+        ], {type: 'application/pdf'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'Samuel_Nkanor_Resume.pdf';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(()=>URL.revokeObjectURL(url), 15000);
+      });
+
+      // IntersectionObserver for fades
+      const faders = document.querySelectorAll('.fade-up');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+      },{threshold:0.12});
+      faders.forEach(el=>io.observe(el));
+
+      // Back to top button
+      const topBtn = document.getElementById('topBtn');
+      window.addEventListener('scroll', ()=>{
+        if(window.scrollY > 500) topBtn.classList.add('show'); else topBtn.classList.remove('show');
+      });
+      topBtn.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+      // Contact form handling: localStorage draft + mailto fallback
+      const form = document.getElementById('contactForm');
+      const formStatus = document.getElementById('formStatus');
+      const saveBtn = document.getElementById('saveDraft');
+
+      // Load draft
+      try{
+        const draft = JSON.parse(localStorage.getItem('portfolio_contact_draft') || '{}');
+        if(draft.name) document.getElementById('name').value = draft.name;
+        if(draft.email) document.getElementById('email').value = draft.email;
+        if(draft.subject) document.getElementById('subject').value = draft.subject;
+        if(draft.message) document.getElementById('message').value = draft.message;
+      }catch(err){console.warn('draft load failed',err)}
+
+      saveBtn && saveBtn.addEventListener('click', ()=>{
+        const draft = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value
+        };
+        localStorage.setItem('portfolio_contact_draft', JSON.stringify(draft));
+        formStatus.textContent = 'Draft saved locally';
+        setTimeout(()=>formStatus.textContent = '', 3000);
+      });
+
+      form && form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if(!name || !email || !message){
+          formStatus.textContent = 'Please fill required fields';
+          return;
+        }
+        const subject = encodeURIComponent(document.getElementById('subject').value || 'Website contact');
+        const body = encodeURIComponent(`Hi Samuel,\n\nMy name is ${name}.\n\n${message}\n\nReply to: ${email}`);
+        window.location.href = `mailto:mac.nkanor@gmail.com?subject=${subject}&body=${body}`;
+        formStatus.textContent = 'Opening your mail client...';
+      });
+
+      // Accessibility: keyboard toggle for mobile menu
+      mobileToggle && mobileToggle.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') mobileToggle.click(); });
+
+      // Helpful fallback: show placeholder avatar if image not found
+      document.getElementById('heroAvatarImg').addEventListener('error', function(){
+        const parent = this.parentElement;
+        parent.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--accent);font-weight:700">SN</div>';
+      });
+
+      // open project links in new tab when labelled Code
+      document.querySelectorAll('a[aria-label^="Source"]').forEach(a=>a.target='_blank');
+
+    })();
+  </script>
+
+</body>
+</html>
