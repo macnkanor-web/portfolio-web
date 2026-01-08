@@ -11,17 +11,46 @@
     /* =====================
        Styles (full file)
        ===================== */
-    :root{
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: #1fb6ff;
-      --accent-2:#7c3aed;
-      --glass: rgba(255,255,255,0.04);
-      --glass-2: rgba(255,255,255,0.02);
-      --radius: 14px;
-      --container: 1100px;
-      --ff-sans: 'Helvetica Neue', Arial, sans-serif;
+   :root{
+  /* DARK THEME (default) */
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #1fb6ff;
+  --accent-2:#7c3aed;
+  --glass: rgba(255,255,255,0.04);
+  --glass-2: rgba(255,255,255,0.02);
+  --radius: 14px;
+  --container: 1100px;
+  --ff-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+/* LIGHT THEME */
+body.light{
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #475569;
+  --accent: #2563eb;
+  --accent-2:#4f46e5;
+  --glass: rgba(0,0,0,0.04);
+  --glass-2: rgba(0,0,0,0.02);
+  color: #0f172a;
+}
+#theme-toggle{
+  background: var(--glass);
+  border: none;
+  color: inherit;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background .3s ease, transform .2s ease;
+}
+
+#theme-toggle:hover{
+  background: var(--glass-2);
+  transform: scale(1.05);
+}
+
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -174,6 +203,9 @@
         </nav>
 
         <div class="cta">
+          <button id="theme-toggle" aria-label="Toggle theme">
+  🌙
+</button>
           <a class="btn" href="#contact">Hire me</a>
           <button class="mobile-toggle btn-ghost" id="mobileToggle" aria-label="Open navigation">☰</button>
         </div>
@@ -491,6 +523,30 @@
     // JavaScript (full)
     // =====================
     (function(){
+      
+    /* ===== THEME TOGGLE LOGIC (PASTE HERE) ===== */
+    const themeToggle = document.getElementById("theme-toggle");
+
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme === "light"){
+      document.body.classList.add("light");
+      themeToggle.textContent = "🌙";
+    } else {
+      themeToggle.textContent = "🌞";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+
+      const isLight = document.body.classList.contains("light");
+      themeToggle.textContent = isLight ? "🌙" : "🌞";
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    });
+    /* ===== END THEME TOGGLE ===== */
+
+    // Mobile nav toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    ...
       // Mobile nav toggle
       const mobileToggle = document.getElementById('mobileToggle');
       const navList = document.querySelector('nav ul');
@@ -603,5 +659,6 @@
 
 </body>
 </html>
+
 
 
